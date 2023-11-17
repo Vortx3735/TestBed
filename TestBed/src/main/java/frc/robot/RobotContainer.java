@@ -72,14 +72,14 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-    con1.l2.onTrue(
+    con1.l2.whileTrue(
       new RunCommand(
         talon::rev, 
         talonsub
       )
     );
 
-    con1.r2.onTrue(
+    con1.r2.whileTrue(
       new RunCommand(
         talon::start, 
         talonsub
