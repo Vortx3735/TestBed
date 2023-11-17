@@ -4,23 +4,37 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.TalonSub;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ExampleCommand extends CommandBase {
+public class TalonCom extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+  private final TalonSub talon;
 
+  
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(ExampleSubsystem subsystem) {
-    m_subsystem = subsystem;
+  public TalonCom(TalonSub inputTalon) {
+    talon = inputTalon;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(talon);
+  }
+
+  public void start() {
+    talon.move(RobotContainer.con1.getR2Axis());
+  }
+  
+  public void stop() {
+    talon.move(0);
+  }
+
+  public void rev() {
+    talon.move(-RobotContainer.con1.getL2Axis());
   }
 
   // Called when the command is initially scheduled.
