@@ -71,7 +71,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+// changed from onTrue to whileTrue
     con1.l2.whileTrue(
       new RunCommand(
         talon::rev, 
