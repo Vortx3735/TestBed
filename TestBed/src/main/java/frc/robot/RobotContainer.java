@@ -44,20 +44,20 @@ public class RobotContainer {
     //    )
     //  );
 
-    // falconsub.setDefaultCommand(
-    //   new RunCommand(
-    //     falcon::moveStick,
-    //     falconsub
-    //   )
-    // );
+    falconsub.setDefaultCommand(
+      new RunCommand(
+        falcon::moveStick,
+        falconsub
+      )
+    );
 
 
-     talonsub.setDefaultCommand(
-       new RunCommand(
-         talon::stop,
-         talonsub
-       )
-     );
+    //  talonsub.setDefaultCommand(
+    //    new RunCommand(
+    //      talon::stop,
+    //      talonsub
+    //    )
+    //  );
   }
 
   /**
@@ -71,19 +71,19 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-     con1.l2.whileTrue(
-       new RunCommand(
-         talon::rev, 
-         talonsub
-       )
-     );
+    //  con1.l2.whileTrue(
+    //    new RunCommand(
+    //      talon::rev, 
+    //      talonsub
+    //    )
+    //  );
 
-     con1.r2.whileTrue(
-       new RunCommand(
-         talon::start, 
-         talonsub
-       )
-      );
+    //  con1.r2.whileTrue(
+    //    new RunCommand(
+    //      talon::start, 
+    //      talonsub
+    //    )
+    //   );
 
   }
 
