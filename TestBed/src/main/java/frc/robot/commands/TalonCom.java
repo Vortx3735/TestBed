@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.TalonSub;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -13,6 +12,7 @@ public class TalonCom extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final TalonSub talon;
 
+  
   
   /**
    * Creates a new ExampleCommand.

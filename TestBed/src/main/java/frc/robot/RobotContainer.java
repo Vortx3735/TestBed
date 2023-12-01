@@ -50,7 +50,14 @@ public class RobotContainer {
         shooter
       )
     );
-
+    
+    con1.r2.whileTrue(
+       new RunCommand(
+       () -> {
+        sho
+       }   
+        )
+   );
     //   sparksub.setDefaultCommand(
     //     new RunCommand(
     //       spark::moveStick,
