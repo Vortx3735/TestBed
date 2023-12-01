@@ -24,8 +24,8 @@ public class RobotContainer {
   
   public static VorTXController con1 = new VorTXController(0);
 
-  // public static SparkMAXSub sparksub = new SparkMAXSub(0);
-  // public static SparkMAXCom spark = new SparkMAXCom(sparksub);
+   public static SparkMAXSub sparksub = new SparkMAXSub(0);
+   public static SparkMAXCom spark = new SparkMAXCom(sparksub);
 
   public static FalconSub falconsub = new FalconSub(1);
   public static FalconCom falcon = new FalconCom(falconsub);
@@ -36,15 +36,15 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
+   //  Configure the trigger bindings
     configureBindings();
 
-    // sparksub.setDefaultCommand(
-    //   new RunCommand(
-    //     spark::moveStick,
-    //     sparksub
-    //   )
-    // );
+    //  sparksub.setDefaultCommand(
+    //    new RunCommand(
+    //      spark::moveStick,
+    //      sparksub
+    //    )
+    //  );
 
     // falconsub.setDefaultCommand(
     //   new RunCommand(
