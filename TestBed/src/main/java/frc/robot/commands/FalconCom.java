@@ -35,7 +35,6 @@ public class FalconCom extends CommandBase {
     }
   }
 
-  
 
   public void start() {
     falcon.move(0.3);

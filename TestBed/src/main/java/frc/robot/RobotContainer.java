@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -24,14 +25,17 @@ public class RobotContainer {
   
   public static VorTXController con1 = new VorTXController(0);
 
-   public static SparkMAXSub sparksub = new SparkMAXSub(0);
-   public static SparkMAXCom spark = new SparkMAXCom(sparksub);
+  //  public static SparkMAXSub sparksub = new SparkMAXSub(0);
+  //  public static SparkMAXCom spark = new SparkMAXCom(sparksub);
 
-  public static FalconSub falconsub = new FalconSub(1);
-  public static FalconCom falcon = new FalconCom(falconsub);
+  public static ShooterSub shootersub = new ShooterSub(5, 6);
+  public static ShooterCom shootercom = new ShooterCom(shootersub);
 
-  public static TalonSub talonsub = new TalonSub(2);
-  public static TalonCom talon = new TalonCom(talonsub);
+  public static TalonSub agitatorsub = new TalonSub(4);
+  public static TalonCom agitatorcom = new TalonCom(agitatorsub);
+
+  public static TalonSub intakesub = new TalonSub(8);
+  public static TalonCom intakecom = new TalonCom(intakesub);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -39,27 +43,34 @@ public class RobotContainer {
    //  Configure the trigger bindings
     configureBindings();
 
-    //  sparksub.setDefaultCommand(
+    //  sparksub.setDefaultCommand
     //    new RunCommand(
     //      spark::moveStick,
     //      sparksub
     //    )
     //  );
 
-    // falconsub.setDefaultCommand(
-    //   new RunCommand(
-    //     falcon::moveStick,
-    //     falconsub
-    //   )
-    // );
-
-    talonsub.setDefaultCommand(
+    shootersub.setDefaultCommand(
       new RunCommand(
-        talon::stop,
-        talonsub
+        shootercom::stop,
+        shootersub
       )
     );
-  }
+
+    agitatorsub.setDefaultCommand(
+      new RunCommand(
+        agitatorcom::stop,
+        agitatorsub
+      )
+    );
+  
+    intakesub.setDefaultCommand(
+      new RunCommand(
+        intakecom::stop,
+        intakesub
+      )
+    );
+}
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -72,19 +83,53 @@ public class RobotContainer {
    */
   private void configureBindings() {
 // changed from onTrue to whileTrue
-    con1.l2.whileTrue(
-      new RunCommand(
-        talon::rev, 
-        talonsub
+    // con1.l2.whileTrue(
+    //   new RunCommand(
+    //     agitatorcom::rev, 
+    //     agitatorsub
+    //   )
+    // );
+
+    // con1.r2.whileTrue(
+    //   new RunCommand(
+    //     agitatorcom::start, 
+    //     agitatorsub
+    //   )
+    // );
+
+    con1.r2.whileTrue(
+      new ParallelCommandGroup(
+        new RunCommand(
+          intakecom::start,
+          intakesub
+        ),
+        new RunCommand(
+          agitatorcom::start,
+          agitatorsub
+        )
       )
     );
 
-    con1.r2.whileTrue(
-      new RunCommand(
-        talon::start, 
-        talonsub
+    con1.l2.whileTrue(
+      new ParallelCommandGroup(
+        new RunCommand(
+          intakecom::rev,
+          intakesub
+        ),
+        new RunCommand(
+          agitatorcom::rev,
+          agitatorsub
+        )
       )
     );
+
+    con1.circle.whileTrue(
+      new RunCommand(
+        shootercom:: shoot,
+        shootersub
+      )
+    );
+
 
   }
 
