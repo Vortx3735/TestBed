@@ -45,11 +45,12 @@ public class RobotContainer {
     //  );
 
     falconsub.setDefaultCommand(
-      new RunCommand(
-        falcon::moveStick,
+      new InstantCommand(
+        falcon::stop,
         falconsub
       )
     );
+
 
 
     //  talonsub.setDefaultCommand(
