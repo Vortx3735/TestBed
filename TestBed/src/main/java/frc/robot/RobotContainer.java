@@ -34,7 +34,7 @@ public class RobotContainer {
   public static TalonSub agitatorsub = new TalonSub(4);
   public static TalonCom agitatorcom = new TalonCom(agitatorsub);
 
-  public static TalonSub intakesub = new TalonSub(8);
+  public static TalonSub intakesub = new TalonSub(7);
   public static TalonCom intakecom = new TalonCom(intakesub);
 
 

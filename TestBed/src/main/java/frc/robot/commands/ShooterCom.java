@@ -36,7 +36,7 @@ public class ShooterCom extends CommandBase {
   }
 
   public void shoot() {
-    falcon.move(0.5);
+    falcon.move(-0.5);
   }
 
   public void stop() {
