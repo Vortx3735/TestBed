@@ -45,6 +45,10 @@ public class FalconCom extends CommandBase {
     falcon.move(0);
   }
 
+  public void rev(){
+    falcon.move(-0.3);
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}

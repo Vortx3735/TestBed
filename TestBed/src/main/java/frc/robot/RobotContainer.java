@@ -4,10 +4,27 @@
 
 package frc.robot;
 
+/*
+Right back drive = 1
+left front drive = 2
+left back drive = 3
+index motor = 4
+Shooter left is 5
+shooter right = 6
+turret rotation = 7
+intake = 8
+right front drive = 10
+left climper = 15
+climber right = 17
+PDP = 0
+ * 
+ */
+
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -26,9 +43,32 @@ public class RobotContainer {
 
    public static SparkMAXSub sparksub = new SparkMAXSub(0);
    public static SparkMAXCom spark = new SparkMAXCom(sparksub);
+/*
+Right back drive = 1
+left front drive = 2
+left back drive = 3
+index motor = 4
+Shooter left is 5
+shooter right = 6
+turret rotation = 7
+intake = 8
+right front drive = 10
+left climper = 15
+climber right = 17
+PDP = 0
+ * 
+ */
+  public static FalconSub RightBackMotor = new FalconSub(1);
+  public static FalconCom RightBack = new FalconCom(RightBackMotor);
 
-  public static FalconSub falconsub = new FalconSub(1);
-  public static FalconCom falcon = new FalconCom(falconsub);
+  public static FalconSub LeftFrontMotor = new FalconSub(2);
+  public static FalconCom LeftFront = new FalconCom(LeftFrontMotor);
+
+  public static FalconSub LeftBackMotor = new FalconSub(3);
+  public static FalconCom LeftBack = new FalconCom(LeftBackMotor);
+
+  public static FalconSub RightFrontMotor = new FalconSub(10);
+  public static FalconCom RightFront = new FalconCom(RightFrontMotor);
 
    public static TalonSub talonsub = new TalonSub(4);
    public static TalonCom talon = new TalonCom(talonsub);
@@ -44,10 +84,28 @@ public class RobotContainer {
     //    )
     //  );
 
-    falconsub.setDefaultCommand(
+    RightBackMotor.setDefaultCommand(
       new InstantCommand(
-        falcon::stop,
-        falconsub
+        RightBack::stop,
+        RightBackMotor
+      )
+    );
+    RightFrontMotor.setDefaultCommand(
+      new InstantCommand(
+        RightFront::stop,
+        RightFrontMotor
+      )
+    );
+    LeftBackMotor.setDefaultCommand(
+      new InstantCommand(
+        LeftBack::stop,
+        LeftBackMotor
+      )
+    );
+    LeftFrontMotor.setDefaultCommand(
+      new InstantCommand(
+        LeftFront::stop,
+        LeftFrontMotor
       )
     );
 
@@ -85,6 +143,108 @@ public class RobotContainer {
     //      talonsub
     //    )
     //   );
+
+/*
+Right back drive = 1
+left front drive = 2
+left back drive = 3
+index motor = 4
+Shooter left is 5
+shooter right = 6
+turret rotation = 7
+intake = 8
+right front drive = 10
+left climper = 15
+climber right = 17
+PDP = 0
+ * 
+ */
+    con1.triangle.whileTrue(
+      new ParallelCommandGroup(
+          new RunCommand(
+          RightFront::rev,
+          RightFrontMotor
+        ),
+        new RunCommand(
+          RightBack::rev,
+          RightBackMotor
+        ),
+        new RunCommand(
+          LeftFront::start,
+          LeftFrontMotor
+        ),
+        new RunCommand(
+          LeftBack::start,
+          LeftBackMotor
+        )
+      )
+    );
+      
+    con1.cross.whileTrue(
+      new ParallelCommandGroup(
+          new RunCommand(
+          RightFront::start,
+          RightFrontMotor
+        ),
+        new RunCommand(
+          RightBack::start,
+          RightBackMotor
+        ),
+        new RunCommand(
+          LeftFront::rev,
+          LeftFrontMotor
+        ),
+        new RunCommand(
+          LeftBack::rev,
+          LeftBackMotor
+        )
+      )
+
+    );
+      
+    con1.square.whileTrue(
+      new ParallelCommandGroup(
+          new RunCommand(
+          RightFront::start,
+          RightFrontMotor
+        ),
+        new RunCommand(
+          RightBack::start,
+          RightBackMotor
+        ),
+        new RunCommand(
+          LeftFront::start,
+          LeftFrontMotor
+        ),
+        new RunCommand(
+          LeftBack::start,
+          LeftBackMotor
+        )
+      )
+
+    );
+      
+    con1.circle.whileTrue(
+      new ParallelCommandGroup(
+          new RunCommand(
+          RightFront::rev,
+          RightFrontMotor
+        ),
+        new RunCommand(
+          RightBack::rev,
+          RightBackMotor
+        ),
+        new RunCommand(
+          LeftFront::rev,
+          LeftFrontMotor
+        ),
+        new RunCommand(
+          LeftBack::rev,
+          LeftBackMotor
+        )
+      )
+
+    );
 
   }
 
